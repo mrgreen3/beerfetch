@@ -1,4 +1,4 @@
-Beerfetch
+**Beerfetch
 
 A light version of neofetch, badly coded but displaying basic system information in a terminal.
 
