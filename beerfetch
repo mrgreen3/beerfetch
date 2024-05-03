@@ -1,10 +1,34 @@
 #!/bin/bash
     clear
+    function beer_logo {
+cat << LOGO
+
+  .   *   ..  . *  *
+*  * @()Ooc()*   o  .
+    (Q@*0CG*O()  ___
+   |\_________/|/ _ 
+   |  |  |  |  | / | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | | | |
+   |  |  |  |  | \_| |
+   |  |  |  |  |\___/
+   |\_|__|__|_/|
+    \_________/                         
+                                                
+
+LOGO
+}
+
+printf "%-${col1_width}s" "$(beer_logo)"
+printf "%s\n"  "" 
+
     echo -e "\e[32mHostname: \e[0m$(hostname)"
     echo -e "\e[32mOperating System: \e[0m$(grep '^PRETTY_NAME' /etc/os-release | cut -d'"' -f2)"
     echo -e "\e[32mKernel Version: \e[0m$(uname -r)"
     echo -e "\e[32mCPU: \e[0m$(grep "model name" /proc/cpuinfo | head -n 1 | awk -F ': ' '{print $2}')"
-    echo -e "\e[32mMemory: \e[0m$(free -g | awk '/^Mem/ {print $2} Gibs')"
+    echo -e "\e[32mMemory: \e[0m$(LANG=C free -g | awk '/^Mem/ {print $2 }') Gibs"
     echo -e "\e[32mShell: \e[0m$SHELL"
     echo
 
