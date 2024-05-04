@@ -1,8 +1,9 @@
 #!/bin/bash
 clear
 echo -e "\e[32mHostname: \e[0m$(hostname)"
-echo -e "\e[32mOperating System: \e[0m$(grep '^PRETTY_NAME' /etc/os-release | cut -d'"' -f2)"
+echo -e "\e[32mOperating System: \e[0m$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)"
 echo -e "\e[32mKernel Version: \e[0m$(uname -r)"
+echo -e "\e[32mWindow Manager: \e[0m$(xprop -root | grep -oP 'WM_NAME\(UTF8_STRING\) = "\K[^"]+')"
 echo -e "\e[32mCPU: \e[0m$(grep "model name" /proc/cpuinfo | head -n 1 | awk -F ': ' '{print $2}')"
 echo -e "\e[32mGPU: \e[0m$(lspci | grep -i vga | sed 's/.*\[\([^]]*\)\].*/\1/')"
 echo -e "\e[32mMemory: \e[0m$(free -g | awk '/^Mem/ {print $2} Gibs')"
