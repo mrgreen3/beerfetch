@@ -1,11 +1,12 @@
 #!/bin/bash
-    clear
-    echo -e "\e[32mHostname: \e[0m$(hostname)"
-    echo -e "\e[32mOperating System: \e[0m$(grep '^PRETTY_NAME' /etc/os-release | cut -d'"' -f2)"
-    echo -e "\e[32mKernel Version: \e[0m$(uname -r)"
-    echo -e "\e[32mCPU: \e[0m$(grep "model name" /proc/cpuinfo | head -n 1 | awk -F ': ' '{print $2}')"
-    echo -e "\e[32mMemory: \e[0m$(free -g | awk '/^Mem/ {print $2} Gibs')"
-    echo -e "\e[32mShell: \e[0m$SHELL"
-    echo
+clear
+echo -e "\e[32mHostname: \e[0m$(hostname)"
+echo -e "\e[32mOperating System: \e[0m$(grep '^PRETTY_NAME' /etc/os-release | cut -d'"' -f2)"
+echo -e "\e[32mKernel Version: \e[0m$(uname -r)"
+echo -e "\e[32mCPU: \e[0m$(grep "model name" /proc/cpuinfo | head -n 1 | awk -F ': ' '{print $2}')"
+echo -e "\e[32mGPU: \e[0m$(lspci | grep -i vga | sed 's/.*\[\([^]]*\)\].*/\1/')"
+echo -e "\e[32mMemory: \e[0m$(free -g | awk '/^Mem/ {print $2} Gibs')"
+echo -e "\e[32mShell: \e[0m$SHELL"
+echo
 
                                                                                                                                         
