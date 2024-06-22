@@ -14,7 +14,7 @@ string=$(printf "%-${#userhost}s" "-"); echo "${string// /-}"
 echo -e "\e[32mOS: \e[0m$(awk -F= '/^PRETTY_NAME/{print $2}' /etc/os-release)"
 echo -e "\e[32mKernel: \e[0m$(uname -r)"
 echo -e "\e[32mWM: \e[0m$(xprop -root | grep -oP 'WM_NAME\(UTF8_STRING\) = "\K[^"]+')"
-echo -e "\e[32mTerminal: \e[0m$TERM"
+echo -e "\e[32mTerminal: \e[0m$TERM" # make sure $TERM is set..
 echo -e "\e[32mCPU: \e[0m$(grep "model name" /proc/cpuinfo | head -n 1 | awk -F ': ' '{print $2}')"
 echo -e "\e[32mGPU: \e[0m$(lspci | grep -i vga | sed 's/.*\[\([^]]*\)\].*/\1/')"
 echo -e "\e[32mMemory: \e[0m$(free -g | awk '/^Mem/ {print $2}') Gibs"
