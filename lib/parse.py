@@ -109,3 +109,24 @@ def parse_lspci(lspci_mm):
         elif "Network controller" in cls and wifi is None:
             wifi = label
     return {"gpu": gpus, "wifi": wifi}
+
+
+def cpu_load(prev, cur):
+    """CPU utilisation in 0..1 from two /proc/stat samples.
+
+    Args:
+        prev: previous (total_jiffies, idle_jiffies) tuple, or None
+        cur:  current  (total_jiffies, idle_jiffies) tuple
+
+    Returns:
+        Float in 0..1 — the busy fraction over the interval between the two
+        samples. Returns 0.0 when there is no usable delta: the first sample
+        (prev is None), a zero/negative interval, or a counter reset.
+    """
+    if not prev:
+        return 0.0
+    dt = cur[0] - prev[0]
+    di = cur[1] - prev[1]
+    if dt <= 0:
+        return 0.0
+    return max(0.0, min(1.0, 1.0 - di / dt))

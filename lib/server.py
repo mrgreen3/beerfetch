@@ -1,13 +1,17 @@
 """Minimal HTTP server for beerfetch.
 
-Single GET /api/sysinfo endpoint — returns JSON.
-Serves the UI panel for all other GET requests.
+GET /api/sysinfo — static hardware overview (JSON).
+GET /api/live    — live CPU load 0..1 (JSON), sampled per request.
+GET /live        — ambient bar view that polls /api/live.
+All other GET requests serve the sysinfo UI panel.
 """
 
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from .system import collect_sysinfo
+from .system import collect_sysinfo, read_cpu_sample
+from .parse import cpu_load
+from .live import render_live_page
 from .ui import render_page
 
 
@@ -39,6 +43,16 @@ class _Handler(BaseHTTPRequestHandler):
                 self._json({"ok": True, "sysinfo": data})
             except Exception as exc:
                 self._json({"ok": False, "error": str(exc)}, status=500)
+        elif self.path == "/api/live":
+            try:
+                cur = read_cpu_sample()
+                load = cpu_load(self.server.last_cpu, cur)
+                self.server.last_cpu = cur
+                self._json({"ok": True, "cpu": load})
+            except Exception as exc:
+                self._json({"ok": False, "error": str(exc)}, status=500)
+        elif self.path == "/live":
+            self._html(render_live_page())
         else:
             self._html(render_page())
 
@@ -46,3 +60,5 @@ class _Handler(BaseHTTPRequestHandler):
 class BeerFetchServer(HTTPServer):
     def __init__(self, server_address):
         super().__init__(server_address, _Handler)
+        # last (total, idle) CPU sample, for the /api/live delta
+        self.last_cpu = read_cpu_sample()

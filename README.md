@@ -27,18 +27,28 @@ python main.py
 # then open http://localhost:7778
 ```
 
+## Live view
+
+beerfetch also serves an ambient live view at `http://localhost:7778/live`: a
+single CPU bar that warms from cool through gold to hot as load climbs. It polls
+`/api/live` (CPU utilisation as a 0..1 value, sampled from `/proc/stat`) once a
+second and eases between samples so it glides rather than jumps. This is the
+first step toward a fuller ambient display driven by live system state.
+
 ## Structure
 
 ```
 beerfetch/
 ├── main.py          # entry point — starts the server and opens the browser
 ├── lib/
-│   ├── parse.py     # pure parsers (unit-testable, no subprocess)
-│   ├── system.py    # subprocess wrappers (lscpu, lsblk, /proc/meminfo)
-│   ├── server.py    # minimal HTTP server + /api/sysinfo endpoint
-│   └── ui.py        # HTML/CSS/JS panel
+│   ├── parse.py     # pure parsers + cpu_load delta (unit-testable, no subprocess)
+│   ├── system.py    # subprocess wrappers (lscpu, lsblk, /proc/meminfo, /proc/stat)
+│   ├── server.py    # minimal HTTP server + /api/sysinfo, /api/live, /live
+│   ├── ui.py        # static HTML/CSS/JS sysinfo panel
+│   └── live.py      # ambient CPU-bar view
 └── tests/
-    └── test_sysinfo.py
+    ├── test_sysinfo.py
+    └── test_live.py
 ```
 
 ## Requirements
