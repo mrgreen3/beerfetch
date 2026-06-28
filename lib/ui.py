@@ -4,44 +4,44 @@ render_page() returns the full page as a string.
 Icons are inline SVG — no external font dependencies.
 """
 
-_ICON_CPU = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6878"
+_ICON_CPU = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bc4d4"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <rect x="7" y="7" width="10" height="10" rx="1"/>
   <path d="M10 2v3M14 2v3M10 19v3M14 19v3M2 10h3M2 14h3M19 10h3M19 14h3"/>
 </svg>"""
 
-_ICON_MEM = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6878"
+_ICON_MEM = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bc4d4"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <rect x="2" y="7" width="20" height="10" rx="1"/>
   <path d="M6 17v2.5M10 17v2.5M14 17v2.5M18 17v2.5"/>
   <path d="M6 7v3M18 7v3"/>
 </svg>"""
 
-_ICON_DISK = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6878"
+_ICON_DISK = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bc4d4"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <ellipse cx="12" cy="6" rx="8" ry="3"/>
   <path d="M4 6v12c0 1.6 3.6 3 8 3s8-1.4 8-3V6"/>
   <path d="M4 12c0 1.6 3.6 3 8 3s8-1.4 8-3"/>
 </svg>"""
 
-_ICON_GPU = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6878"
+_ICON_GPU = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bc4d4"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <rect x="2" y="4" width="20" height="13" rx="2"/>
   <path d="M8 21h8M12 17v4"/>
 </svg>"""
 
-_ICON_WIFI = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6878"
+_ICON_WIFI = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bc4d4"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <path d="M2 8.5C5.8 4.8 9.6 3 12 3s6.2 1.8 10 5.5"/>
   <path d="M5.5 12c1.8-1.8 4-2.8 6.5-2.8s4.7 1 6.5 2.8"/>
   <path d="M9 15.5c.8-.8 1.9-1.3 3-1.3s2.2.5 3 1.3"/>
-  <circle cx="12" cy="19" r="1.2" fill="#4a6878" stroke="none"/>
+  <circle cx="12" cy="19" r="1.2" fill="#5bc4d4" stroke="none"/>
 </svg>"""
 
-_ICON_FW = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4a6878"
+_ICON_FW = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bc4d4"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <rect x="5" y="5" width="14" height="14" rx="1.5"/>
-  <circle cx="8.5" cy="8.5" r="1" fill="#4a6878" stroke="none"/>
+  <circle cx="8.5" cy="8.5" r="1" fill="#5bc4d4" stroke="none"/>
   <path d="M2 9.5h3M2 14.5h3M19 9.5h3M19 14.5h3"/>
 </svg>"""
 
@@ -70,7 +70,7 @@ button {
 button:hover { background: #7ad4e4; }
 .logo { text-align: center; margin-bottom: 24px; }
 .section-lbl {
-  color: #4a6878;
+  color: #5bc4d4;
   font-size: .85em;
   margin: 14px 0 4px;
   display: flex;
