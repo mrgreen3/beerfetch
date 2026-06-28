@@ -24,6 +24,20 @@ _ICON_DISK = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stro
   <path d="M4 12c0 1.6 3.6 3 8 3s8-1.4 8-3"/>
 </svg>"""
 
+_ICON_GPU = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c8070"
+     stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="4" width="20" height="13" rx="2"/>
+  <path d="M8 21h8M12 17v4"/>
+</svg>"""
+
+_ICON_WIFI = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c8070"
+     stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2 8.5C5.8 4.8 9.6 3 12 3s6.2 1.8 10 5.5"/>
+  <path d="M5.5 12c1.8-1.8 4-2.8 6.5-2.8s4.7 1 6.5 2.8"/>
+  <path d="M9 15.5c.8-.8 1.9-1.3 3-1.3s2.2.5 3 1.3"/>
+  <circle cx="12" cy="19" r="1.2" fill="#8c8070" stroke="none"/>
+</svg>"""
+
 _ICON_FW = """<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8c8070"
      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
   <rect x="5" y="5" width="14" height="14" rx="1.5"/>
@@ -99,9 +113,15 @@ async function load() {
   const diskLines = s.disks.length
     ? s.disks.map(x => esc([x.path, x.size, x.model].filter(Boolean).join('  '))).join('<br>')
     : '<span class="muted">none detected</span>';
+  const gpuLines = s.gpu && s.gpu.length
+    ? s.gpu.map(esc).join('<br>')
+    : '<span class="muted">none detected</span>';
+  const wifiLine = s.wifi ? esc(s.wifi) : '<span class="muted">none detected</span>';
   body.innerHTML =
-    LBCPU + '<p class="val">' + (cpuLine || 'unknown') + '</p>' +
+    LBCPU  + '<p class="val">' + (cpuLine || 'unknown') + '</p>' +
     LBMEM  + '<p class="val">' + (esc(s.mem.total) || 'unknown') + '</p>' +
+    LBGPU  + '<p class="val">' + gpuLines + '</p>' +
+    LBWIFI + '<p class="val">' + wifiLine + '</p>' +
     LBDISK + '<p class="val">' + diskLines + '</p>' +
     LBFW   + '<p class="val">' + esc(s.firmware) + '</p>';
 }
@@ -114,6 +134,8 @@ def render_page():
     icon_labels = {
         "LBCPU":  f'<p class="section-lbl">{_ICON_CPU}CPU</p>',
         "LBMEM":  f'<p class="section-lbl">{_ICON_MEM}Memory</p>',
+        "LBGPU":  f'<p class="section-lbl">{_ICON_GPU}GPU</p>',
+        "LBWIFI": f'<p class="section-lbl">{_ICON_WIFI}Wi-Fi</p>',
         "LBDISK": f'<p class="section-lbl">{_ICON_DISK}Drives</p>',
         "LBFW":   f'<p class="section-lbl">{_ICON_FW}Firmware</p>',
     }

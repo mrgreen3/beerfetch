@@ -7,7 +7,7 @@ Kept separate from parse.py so parsers stay unit-testable without hardware.
 import os
 import subprocess
 
-from .parse import parse_sysinfo
+from .parse import parse_sysinfo, parse_lspci
 
 
 def is_uefi():
@@ -32,4 +32,10 @@ def collect_sysinfo():
         capture_output=True, text=True
     ).stdout
 
-    return parse_sysinfo(lscpu, meminfo, lsblk, is_uefi())
+    lspci = subprocess.run(
+        ["lspci", "-mm"], capture_output=True, text=True
+    ).stdout
+
+    result = parse_sysinfo(lscpu, meminfo, lsblk, is_uefi())
+    result.update(parse_lspci(lspci))
+    return result

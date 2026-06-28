@@ -5,6 +5,7 @@ are fully unit-testable without hardware.
 """
 
 import json
+import shlex
 
 
 def parse_sysinfo(lscpu_json, meminfo, lsblk_json, uefi):
@@ -75,3 +76,36 @@ def parse_sysinfo(lscpu_json, meminfo, lsblk_json, uefi):
         "disks":    disks,
         "firmware": "UEFI" if uefi else "BIOS",
     }
+
+
+def parse_lspci(lspci_mm):
+    """Parse ``lspci -mm`` output into GPU and Wi-Fi entries.
+
+    Args:
+        lspci_mm: stdout of ``lspci -mm``
+
+    Returns:
+        {
+            "gpu":  [str, ...],   # vendor + device strings, one per GPU found
+            "wifi": str | None,   # first Network controller found, or None
+        }
+    """
+    gpus = []
+    wifi = None
+    for line in lspci_mm.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            parts = shlex.split(line)
+        except ValueError:
+            continue
+        if len(parts) < 4:
+            continue
+        cls, vendor, device = parts[1], parts[2], parts[3]
+        label = f"{vendor} {device}".strip()
+        if any(k in cls for k in ("VGA", "3D", "Display")):
+            gpus.append(label)
+        elif "Network controller" in cls and wifi is None:
+            wifi = label
+    return {"gpu": gpus, "wifi": wifi}
