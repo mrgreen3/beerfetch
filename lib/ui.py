@@ -160,10 +160,9 @@ def render_page():
     <text x="150" y="70" text-anchor="middle" font-family="monospace" font-size="56"
           font-weight="bold" fill="#5bc4d4">^!</text>
     <text x="150" y="98" text-anchor="middle" font-family="monospace" font-size="15"
-          fill="#b8cfe0" letter-spacing="5">beerfetch</text>
+          fill="#b8cfe0" letter-spacing="5">System Information</text>
   </svg>
 </div>
-<h2>System Information</h2>
 <div id="status"></div>
 <div id="sysinfo-body">Loading\u2026</div>
 <hr class="rule">
