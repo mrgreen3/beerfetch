@@ -58,16 +58,16 @@ body {
 }
 h2 { color: #5bc4d4; margin-bottom: 12px; }
 button {
-  background: #5bc4d4;
-  color: #0f1923;
-  border: none;
+  background: transparent;
+  color: #5bc4d4;
+  border: 1px solid #253545;
   border-radius: 6px;
   padding: 10px 18px;
   font-family: monospace;
   font-size: 1em;
   cursor: pointer;
 }
-button:hover { background: #7ad4e4; }
+button:hover { border-color: #5bc4d4; }
 .logo { text-align: center; margin-bottom: 24px; }
 .section-lbl {
   color: #5bc4d4;
