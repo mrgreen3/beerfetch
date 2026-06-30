@@ -167,7 +167,6 @@ def render_page():
 <div id="sysinfo-body">Loading\u2026</div>
 <hr class="rule">
 <button onclick="load()">Refresh</button>
-</div>
 <script>
 {js_consts}
 {_JS}

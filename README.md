@@ -44,7 +44,7 @@ beerfetch/
 ## Requirements
 
 - Python 3.8+
-- Arch Linux / FruitBang (or any system with lscpu and lsblk)
+- Arch Linux / FruitBang (or any system with `lscpu`, `lsblk`, and `lspci`)
 
 ## License
 
