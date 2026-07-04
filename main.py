@@ -22,7 +22,7 @@ def main():
         print(f"Port {PORT} is already in use; is beerfetch already running?")
         return
 
-    server = BeerFetchServer(("127.0.0.1", PORT))
+    server = BeerFetchServer(("0.0.0.0", PORT))
     t = threading.Thread(target=server.serve_forever, daemon=True)
     t.start()
     print(f"beerfetch running at http://localhost:{PORT}")
