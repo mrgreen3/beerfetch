@@ -1,6 +1,6 @@
 # beerfetch 🍺
 
-A lightweight standalone system information tool for FruitBang and Arch-based systems.
+A lightweight standalone system information tool for ArchBang and Arch-based systems.
 Served locally via a minimal HTTP server and viewed in any browser.
 
 ```
@@ -11,13 +11,15 @@ Drives    /dev/sda  238.5G  SAMSUNG MZ7LN256
 Firmware  UEFI
 ```
 
+![beerfetch screenshot](screenshot.png)
+
 ## Overview
 
 beerfetch probes the local machine (lscpu, /proc/meminfo, lsblk) and serves a
 clean browser-based overview on localhost. No external dependencies beyond Python
 and the standard library. Icons are inline SVG — no font dependencies.
 
-Inspired by neofetch/fastfetch but browser-based and built around FruitBang's
+Inspired by neofetch/fastfetch but browser-based and built around ArchBang's
 visual identity.
 
 ## Usage
@@ -44,7 +46,7 @@ beerfetch/
 ## Requirements
 
 - Python 3.8+
-- Arch Linux / FruitBang (or any system with `lscpu`, `lsblk`, and `lspci`)
+- Arch Linux / ArchBang (or any system with `lscpu`, `lsblk`, and `lspci`)
 
 ## License
 
